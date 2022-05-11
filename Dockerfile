@@ -11,9 +11,11 @@ RUN make -C /src install PREFIX=/pkg GO_BUILDFLAGS='-mod vendor'
 
 ################################################################################
 
-FROM alpine:${ALPINE_VERSION}
-MAINTAINER "Stefan Majewsky <stefan.majewsky@sap.com>"
-LABEL source_repository="https://github.com/sapcc/ntp_exporter"
+FROM scratch as scratch
+COPY --from=builder /pkg/ /usr/
+ENTRYPOINT ["/usr/bin/ntp_exporter"]
+
+FROM quay.io/sysdig/sysdig-mini-ubi:1.2.12 as ubi
 
 COPY --from=builder /pkg/ /usr/
 ENTRYPOINT ["/usr/bin/ntp_exporter"]
