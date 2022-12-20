@@ -1,15 +1,20 @@
 # Configuration file for <https://github.com/sapcc/go-makefile-maker>
 
+metadata:
+  url: https://github.com/sapcc/ntp_exporter
+
 binaries:
   - name: ntp_exporter
     fromPackage: .
     installTo: bin/
 
-variables:
-  GO_LDFLAGS: "-X main.version=$(shell ./util/find_version.sh)"
-
 vendoring:
   enabled: true
+
+dockerfile:
+  enabled: true
+  extraIgnores:
+    - "dist/"
 
 golangciLint:
   createConfig: true
@@ -20,6 +25,7 @@ spellCheck:
 githubWorkflow:
   global:
     assignees:
+      - majewsky
       - SuperSandro2000
     ignorePaths: [ "**.md" ] # all Markdown files
   ci:

@@ -1,10 +1,6 @@
-# renovate: datasource=docker depName=alpine versioning=docker
-ARG ALPINE_VERSION=3.15
-# renovate: datasource=docker depName=golang versioning=docker
-ARG GOLANG_VERSION=1.17.10-alpine
+FROM golang:1.19.4-alpine3.17 as builder
 
-FROM golang:${GOLANG_VERSION}${ALPINE_VERSION} as builder
-RUN apk add --no-cache make gcc musl-dev
+RUN apk add --no-cache gcc git make musl-dev
 
 COPY . /src
 RUN make -C /src install PREFIX=/pkg GO111MODULE=on CGO_ENABLED=0 GO_BUILDFLAGS='-mod vendor'

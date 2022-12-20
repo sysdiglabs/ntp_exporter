@@ -5,6 +5,20 @@
 This is a Prometheus exporter that, when running on a node, checks the drift
 of that node's clock against a given NTP server or servers.
 
+These are the metrics supported.
+
+- `ntp_build_info`
+- `ntp_drift_seconds`
+- `ntp_stratum`
+- `ntp_rtt_seconds`
+- `ntp_reference_timestamp_seconds`
+- `ntp_root_delay_seconds`
+- `ntp_root_dispersion_seconds`
+- `ntp_root_distance_seconds`
+- `ntp_precision_seconds`
+- `ntp_leap`
+- `ntp_scrape_duration_seconds`
+
 As an alternative to [the node-exporter's `time` module](https://github.com/prometheus/node_exporter/blob/master/docs/TIME.md), this exporter does not require an NTP component on localhost that it can talk to. We only look at the system clock and talk to the configured NTP server(s).
 
 ## Installation
@@ -20,7 +34,7 @@ We also publish pre-built images on Docker Hub as
 [sapcc/ntp-exporter](https://hub.docker.com/r/sapcc/ntp-exporter):
 
 ```bash
-docker pull sapcc/ntp-exporter:v2.0.2
+docker pull sapcc/ntp-exporter:v2.1.0
 ```
 
 ## Usage

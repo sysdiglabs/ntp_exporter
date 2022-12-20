@@ -31,10 +31,10 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/sapcc/go-api-declarations/bininfo"
 )
 
 var (
-	version                string // will be substituted at compile-time
 	showVersion            bool
 	listenAddress          string
 	metricsPath            string
@@ -45,6 +45,10 @@ var (
 )
 
 var logger = log.New(os.Stderr, "", log.LstdFlags)
+
+var version = bininfo.VersionOr("unknown")
+var buildDate = bininfo.BuildDateOr("unknown")
+var revision = bininfo.CommitOr("unknown")
 
 func main() {
 	if showVersion {
@@ -68,7 +72,7 @@ func main() {
 	http.HandleFunc("/", handlerDefault)
 
 	logger.Println("listening on", listenAddress)
-	err := http.ListenAndServe(listenAddress, nil)
+	err := http.ListenAndServe(listenAddress, nil) //nolint: gosec // no timeout is required
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -133,6 +137,9 @@ func handlerDefault(w http.ResponseWriter, r *http.Request) {
 			<body>
 			<h1>NTP Exporter</h1>
 			<p><a href="` + metricsPath + `">Metrics</a></p>
+			<p>Version: ` + version + `</p>
+			<p>Revision: ` + revision + `</p>
+			<p>Build date: ` + buildDate + `</p>
 			</body>
 			</html>`))
 }
