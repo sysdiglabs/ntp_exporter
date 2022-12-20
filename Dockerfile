@@ -7,7 +7,7 @@ FROM golang:${GOLANG_VERSION}${ALPINE_VERSION} as builder
 RUN apk add --no-cache make gcc musl-dev
 
 COPY . /src
-RUN make -C /src install PREFIX=/pkg GO_BUILDFLAGS='-mod vendor'
+RUN make -C /src install PREFIX=/pkg GO111MODULE=on CGO_ENABLED=0 GO_BUILDFLAGS='-mod vendor'
 
 ################################################################################
 
