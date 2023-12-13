@@ -11,7 +11,7 @@ FROM scratch as scratch
 COPY --from=builder /pkg/ /usr/
 ENTRYPOINT ["/usr/bin/ntp_exporter"]
 
-FROM quay.io/sysdig/sysdig-mini-ubi:1.4.7 as ubi
+FROM quay.io/sysdig/sysdig-mini-ubi9:1.2.0 as ubi
 
 COPY --from=builder /pkg/ /usr/
 ENTRYPOINT ["/usr/bin/ntp_exporter"]
