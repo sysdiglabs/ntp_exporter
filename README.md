@@ -1,3 +1,15 @@
+## ⚠️ Repository Archived - No Longer Maintained
+
+Notice: This repository is no longer actively maintained by Sysdig.
+
+As of 21st June 2024, we will not be providing any further updates, bug fixes, or support for this project. Instead of forking this repository, we recommend using the original repository from which this project was forked: [NTP_EXPORTER](https://github.com/sapcc/ntp_exporter).
+
+We have transitioned to using the Docker image for this Prometheus exporter, which is based on the original repository. You can find more information and the Docker image here: [Docker Image Link](https://hub.docker.com/r/sapcc/ntp-exporter).
+
+We appreciate the community's contributions and support over the lifespan of this project.
+
+Thank you for your understanding.
+
 # ntp\_exporter
 
 [![CI](https://github.com/sapcc/ntp_exporter/actions/workflows/ci.yaml/badge.svg)](https://github.com/sapcc/ntp_exporter/actions/workflows/ci.yaml)
